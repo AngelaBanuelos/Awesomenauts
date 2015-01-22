@@ -9,8 +9,9 @@ game.PlayScreen = me.ScreenObject.extend({
 		//telling it what to look at as far as maps
 		me.levelDirector.loadLevel("level01");
 		// add our HUD to the game world
-
+		// set a value to the variable player.
 		var player = me.pool.pull("player", 0, 420, {});
+		//sets the height of where the player appears on the screen.
 		me.game.world.addChild(player, 5); 
 
 		this.HUD = new game.HUD.Container();
