@@ -20,7 +20,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}]);
 		//sets the speen of the player when it moves to the right 
-		this.body.setVelocity(5,0);
+		this.body.setVelocity(5, 20);
 
 	},
 	// updates the fucntion 
