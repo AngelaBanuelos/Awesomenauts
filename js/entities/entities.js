@@ -20,8 +20,6 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}]);
 		//sets the speen of the player when it moves to the right 
-		//we changed the wide location. 
-		//moved down to the platform.
 		this.body.setVelocity(5, 20);
 
 	},
