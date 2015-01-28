@@ -66,20 +66,30 @@ update: function(delta){
 
 
 game.PlayerBaseEntity = me.Entity.extend({
+		//initializes the function
 	init : function(x, y, settings) {
 		this._super(me.Entity, 'init', [x, y, {
+			// makes the image of the tower appear.
 			image: "tower",
+			//width of the space created
 			width: 100, 
+			//height of the space created
 			height: 100,
+			//width for the tower
 			spritewidth: "100", 
+			//height for the tower
 			spriteheight: "100",
 			getShape: function(){
+					//creates a rectangle by 64 by 64 
+				// 0, 0 is the origin
 				return(new me.Rect(0, 0, 100, 100)).toPolygon();
 			}
 		}]);
-	
+		//variables
+		//tower has not been destroyed
 		this.broken = false;
 		this.health = 10;
+		//even if were not on the screen with the tower,, it still updates
 		this.alwaysUpdate = true;
 		this.body.onCollision = this.onCollision.bind(this);
 
@@ -87,7 +97,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 
 
 	},
-
+	//if the health is 0, the character dies
 	update:function(){
 		if(this.health<=0){
 			this.broken = true;
@@ -102,21 +112,28 @@ game.PlayerBaseEntity = me.Entity.extend({
 
 });
 game.EnemyBaseEntity = me.Entity.extend({
+		//initializes the function
 	init : function(x, y, settings) {
 		this._super(me.Entity, 'init', [x, y, {
+			// makes the image of the tower appear.
 			image: "tower",
+			//width of the space created
 			width: 100, 
+			//height of the space created
 			height: 100,
+			//width for the tower
 			spritewidth: "100", 
+			//height for the tower
 			spriteheight: "100",
 			getShape: function(){
+					//creates a rectangle by 64 by 64 
+				// 0, 0 is the origin
 				return(new me.Rect(0, 0, 100, 100)).toPolygon();
 			}
 		}]);
 		//variables
-		//tower has not been setryoed
+		//tower has not been destroyed
 		this.broken = false;
-		//
 		this.health = 10;
 		//even if were not on the screen with the tower,, it still updates
 		this.alwaysUpdate = true;
@@ -126,7 +143,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 
 
 	},
-
+	//if the health is 0, the character dies
 	update:function(){
 		if(this.health<=0){
 			this.broken = true;
@@ -136,7 +153,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 		return true;
 	},
 	onCollision: function(){
-		
+
 	}
 
 });
