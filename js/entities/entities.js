@@ -21,6 +21,7 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 		//sets the speen of the player when it moves to the right 
 		this.body.setVelocity( 5, 20);
+		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 		//adds animation to standing starting position
 		this.renderable.addAnimation("idle", [78]);
 		//adds animation to walking
@@ -91,16 +92,20 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this.health = 10;
 		//even if were not on the screen with the tower,, it still updates
 		this.alwaysUpdate = true;
+
 		this.body.onCollision = this.onCollision.bind(this);
 
 		this.type = "PlayerBaseEntity";
-
+		this.renderable.addAnimation("idle", [0]);
+		this.renderable.addAnimation("broken", [1])
+		this.renderable.setCurrentAnimation("idle");
 
 	},
 	//if the health is 0, the character dies
-	update:function(){
+	update:function(delta){
 		if(this.health<=0){
 			this.broken = true;
+			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
 		this._super(me.Entity, "update", [delta]);
@@ -140,13 +145,16 @@ game.EnemyBaseEntity = me.Entity.extend({
 		this.body.onCollision = this.onCollision.bind(this);
 
 		this.type = "EnemyBaseEntity";
-
+		this.renderable.addAnimation("idle", [0]);
+		this.renderable.addAnimation("broken", [1])
+		this.renderable.setCurrentAnimation("idle");
 
 	},
 	//if the health is 0, the character dies
-	update:function(){
+	update:function(delta){
 		if(this.health<=0){
 			this.broken = true;
+			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
 		this._super(me.Entity, "update", [delta]);
