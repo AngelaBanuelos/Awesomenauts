@@ -44,15 +44,16 @@ update: function(delta){
 	}
 
 	//if the button is pushed then the character will walk but if not it will execute the else code.
-	if(this.body.vel.x !==0 ){
-	if(!this.renderable.isCurrentAnimation("walk")){
-		this.renderable.setCurrentAnimation("walk");
+	if(this.body.vel.x !== 0 ){
+		if(!this.renderable.isCurrentAnimation("walk")){
+			this.renderable.setCurrentAnimation("walk");
 
-	}else{
+		}
+	}
+	else{
 		//if not, make it stand still.
 		this.renderable.setCurrentAnimation("idle");
 	}
-}
 
 	//updates the function to true
 	this.body.update(delta);
@@ -60,5 +61,82 @@ update: function(delta){
 	this._super(me.Entity, "update", [delta]);
 	return true;
 }
+
+});
+
+
+game.PlayerBaseEntity = me.Entity.extend({
+	init : function(x, y, settings) {
+		this._super(me.Entity, 'init', [x, y, {
+			image: "tower",
+			width: 100, 
+			height: 100,
+			spritewidth: "100", 
+			spriteheight: "100",
+			getShape: function(){
+				return(new me.Rect(0, 0, 100, 100)).toPolygon();
+			}
+		}]);
+	
+		this.broken = false;
+		this.health = 10;
+		this.alwaysUpdate = true;
+		this.body.onCollision = this.onCollision.bind(this);
+
+		this.type = "PlayerBaseEntity";
+
+
+	},
+
+	update:function(){
+		if(this.health<=0){
+			this.broken = true;
+		}
+		this.body.update(delta);
+		this._super(me.Entity, "update", [delta]);
+		return true;
+	},
+	onCollision: function(){
+
+	}
+
+});
+game.EnemyBaseEntity = me.Entity.extend({
+	init : function(x, y, settings) {
+		this._super(me.Entity, 'init', [x, y, {
+			image: "tower",
+			width: 100, 
+			height: 100,
+			spritewidth: "100", 
+			spriteheight: "100",
+			getShape: function(){
+				return(new me.Rect(0, 0, 100, 100)).toPolygon();
+			}
+		}]);
+		//variables
+		//tower has not been setryoed
+		this.broken = false;
+		//
+		this.health = 10;
+		//even if were not on the screen with the tower,, it still updates
+		this.alwaysUpdate = true;
+		this.body.onCollision = this.onCollision.bind(this);
+
+		this.type = "EnemyBaseEntity";
+
+
+	},
+
+	update:function(){
+		if(this.health<=0){
+			this.broken = true;
+		}
+		this.body.update(delta);
+		this._super(me.Entity, "update", [delta]);
+		return true;
+	},
+	onCollision: function(){
+		
+	}
 
 });
