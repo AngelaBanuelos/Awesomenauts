@@ -21,6 +21,7 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 		//sets the speen of the player when it moves to the right 
 		this.body.setVelocity( 5, 20);
+		//
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 		//adds animation to standing starting position
 		this.renderable.addAnimation("idle", [78]);
@@ -96,8 +97,11 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this.body.onCollision = this.onCollision.bind(this);
 
 		this.type = "PlayerBaseEntity";
+		// this animation makes the playerbase stay still.
 		this.renderable.addAnimation("idle", [0]);
+		//this one breaks the idle animation.
 		this.renderable.addAnimation("broken", [1])
+		//this one sets it back idle(standing still)
 		this.renderable.setCurrentAnimation("idle");
 
 	},
@@ -105,6 +109,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 	update:function(delta){
 		if(this.health<=0){
 			this.broken = true;
+			//when the player dies, the tower is set on fire. 
 			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
@@ -145,8 +150,11 @@ game.EnemyBaseEntity = me.Entity.extend({
 		this.body.onCollision = this.onCollision.bind(this);
 
 		this.type = "EnemyBaseEntity";
+		// this animation makes the playerbase stay still.
 		this.renderable.addAnimation("idle", [0]);
+		//this one breaks the idle animation.
 		this.renderable.addAnimation("broken", [1])
+		//this one sets it back idle(standing still)
 		this.renderable.setCurrentAnimation("idle");
 
 	},
@@ -154,6 +162,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 	update:function(delta){
 		if(this.health<=0){
 			this.broken = true;
+			//when the player dies, the tower is set on fire. 
 			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
