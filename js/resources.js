@@ -25,14 +25,17 @@ game.resources = [
 	 * {name: "example01", type: "tmx", src: "data/map/example01.json"},
  	 */
  	 //added the map to connect it to the localhost
- 	 {name: "level01", type: "tmx", src: "data/map/test.tmx"}
+ 	 {name: "level01", type: "tmx", src: "data/map/test.tmx"},
 	/* Background music. 
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
 	 */	
-
+	 //loads background music
+	 {name: "coolKid", type: "audio", src: "data/bgm/"},
 	/* Sound effects. 
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}
 	 */
+	 //loads the sound effect
+	 {name: "jump", type: "audio", src: "data/sfx/"}
 ];
