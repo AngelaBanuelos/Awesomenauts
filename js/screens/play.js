@@ -13,6 +13,10 @@ game.PlayScreen = me.ScreenObject.extend({
 		var player = me.pool.pull("player", 0, 420, {});
 		//sets the height of where the player appears on the screen.
 		me.game.world.addChild(player, 5); 
+
+		var gamemanager = me.pool.pull("GameManager", 0, 0, {});
+		me.game.world.addChild(gamemanager, 0);
+
 		//moves the player to the right once the right arrow is pushed 
 		me.input.bindKey(me.input.KEY.RIGHT, "right");
 		me.input.bindKey(me.input.KEY.LEFT, "left");
