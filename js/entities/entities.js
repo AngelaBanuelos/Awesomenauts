@@ -21,11 +21,13 @@ game.PlayerEntity = me.Entity.extend({
                 }
             }]);
         this.type = "PlayerEntity";
-        this.health = 20;
+        //changed to global variable playerHealth
+        this.health = game.data.playerHealth;
         //it sets the speed of the player when it moves to the right
         //y location changes
         //it moved down to the player
-        this.body.setVelocity(5, 20);
+        //changed velocity to global variable 
+        this.body.setVelocity(game.data.playerMoveSpeed, 20);
         //keeps track of which direction your character is going
         this.facing = "right";
         //checks the time for the game
@@ -33,6 +35,8 @@ game.PlayerEntity = me.Entity.extend({
         this.lastHit = this.now;
         //stop the player from hitting over and over again
         this.lastAttack = new Date().getTime();
+        //states  that the player is alive.
+        this.dead = false;
         //
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
         //adds animation to standing starting position
@@ -50,6 +54,16 @@ game.PlayerEntity = me.Entity.extend({
     update: function(delta) {
         //keeps it up to date
         this.now = new Date().getTime();
+        //if statement for haelth
+        if (this.health <= 0){
+        	//if health 0, player dies
+        	this.dead = true;
+        	this.pos.x = 10;
+        	this.pos.y = 0;
+        	//made the health qual a global variable for playerHealth
+        	this.health = game.data.playerHealth;
+        }
+
         //moves the player right
         if (me.input.isKeyPressed("right")) {
             //sets the position of my x by adding the velocity defined above in setVelocity and multiplying it by me.timer.tick
@@ -147,13 +161,14 @@ game.PlayerEntity = me.Entity.extend({
                 //moves player forward
                 this.pos.x = this.pos.x + 1;
             }
-
-            if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= 1000) {
+            //added global variable for playerAttackTimer
+            if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer) {
                 //check when it is called
                 console.log("tower Hit");
                 this.lastHit = this.now;
                 //call the losehealth function
-                response.b.loseHealth();
+                //added global variable for playerAttack
+                response.b.loseHealth(game.data.playerAttack);
             }
             //if the player collide with the enemy creep, this code gets executed.
         }else if(response.b.type==='EnemyCreep'){
@@ -179,14 +194,15 @@ game.PlayerEntity = me.Entity.extend({
         			this.body.vel.x = 0;
         		}
         	}
-        	//
-        	if(this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= 1000
+        	//added a global variable for playerAttackTimer
+        	if(this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer
         			&& (Math.abs(ydif) <=40) && 
         			(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))) {
         		//
         		this.lastHit = this.now;
         		//calls the lose health function from the creep.
-        		response.b.loseHealth(1);
+        		//aded a global variable for playerAttack
+        		response.b.loseHealth(game.data.playerAttack);
         	}
         }
     }
@@ -216,7 +232,8 @@ game.PlayerBaseEntity = me.Entity.extend({
         //variables
         //tower has not been destroyed
         this.broken = false;
-        this.health = 10;
+        // made the health of the player base equal the global variable foe playerBaseHealth
+        this.health = game.data.playerBaseHealth;
         //even if were not on the screen with the tower , it still updates
         this.alwaysUpdate = true;
         this.body.onCollision = this.onCollision.bind(this);
@@ -274,7 +291,8 @@ game.EnemyBaseEntity = me.Entity.extend({
         //variables
         //tower has not been destroyed
         this.broken = false;
-        this.health = 10;
+        //added global variable for playerBaseHealth
+        this.health = game.data.playerBaseHealth;
         //even if were not on the screen with the tower , it still updates
         this.alwaysUpdate = true;
         this.body.onCollision = this.onCollision.bind(this);
@@ -327,8 +345,8 @@ game.EnemyCreep = me.Entity.extend({
                     return(new me.Rect(0, 0, 32, 64)).toPolygon();
                 }
             }]);
-
-        this.health = 5;
+        //added global variable for enemyCreepHealth
+        this.health = game.data.enemyCreepHealth;
         //to always update
         this.alwaysUpdate = true;
         //this lets us know if the enemy is currently attacking
@@ -383,7 +401,8 @@ game.EnemyCreep = me.Entity.extend({
                 //updates the lasthit timer
                 this.lastHit = this.now;
                 //makes the player base call its loseHealth function and passes it a damage of 1
-                response.b.loseHealth(1);
+                //added the global variable for enemyCreepAttack
+                response.b.loseHealth(game.data.enemyCreepAttack);
             }
         }else if (response.b.type==='PlayerEntity'){
         	var xdif = this.pos.x - response.b.pos.x;
@@ -399,10 +418,12 @@ game.EnemyCreep = me.Entity.extend({
            	}
             //checks that it has been at least one second since this creep hits something
             if ((this.now - this.lastHit >= 1000) && xdif>0) {
+            	console.log("attacking player");
                 //updates the lasthit timer
                 this.lastHit = this.now;
                 //makes the player call its loseHealth function and passes it a damage of 1
-                response.b.loseHealth(1);
+                //added the global variable for enemyCreepAttack.
+                response.b.loseHealth(game.data.enemyCreepAttack);
             }
         }
 
