@@ -61,13 +61,16 @@ var game = {
 	"loaded" : function () {
 		//registered a player entity
 		me.pool.register("player", game.PlayerEntity, true);
+		//registered a second player
+		me.pool.register("Player2", game.Player2, true);
+
 		//registered a playerbase to entity 
 		me.pool.register("PlayerBase", game.PlayerBaseEntity);
 		//registered a enemybase to entity.
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
 		me.pool.register("GameManager", game.GameManager);
-		
+
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 

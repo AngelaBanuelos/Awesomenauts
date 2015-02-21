@@ -8,12 +8,8 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		//telling it what to look at as far as maps
 		me.levelDirector.loadLevel("level01");
+		this.resetPlayer(0, 420);
 		
-		// set a value to the variable player.
-		var player = me.pool.pull("player", 0, 420, {});
-		//sets the height of where the player appears on the screen.
-		me.game.world.addChild(player, 5); 
-
 		var gamemanager = me.pool.pull("GameManager", 0, 0, {});
 		me.game.world.addChild(gamemanager, 0);
 
@@ -38,5 +34,14 @@ game.PlayScreen = me.ScreenObject.extend({
 	onDestroyEvent: function() {
 		// remove the HUD from the game world
 		me.game.world.removeChild(this.HUD);
+	},
+
+	resetPlayer: function(x, y){
+		// set a value to the variable player.
+		 game.data.player = me.pool.pull("player", 0, 420, {});
+		//sets the height of where the player appears on the screen.
+		me.game.world.addChild(game.data.player, 5); 
+
+
 	}
 });

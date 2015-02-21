@@ -13,6 +13,8 @@ game.resources = [
 	 //added tower image to load on the map.
 	 {name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
 	 {name: "creep1", type:"image", src: "data/img/brainmonster.png"},
+	 // loads second player image
+	 {name: "Player2", type:"image", src: "data/img/gloop.png"},
 		
 	/* Atlases 
 	 * @example
