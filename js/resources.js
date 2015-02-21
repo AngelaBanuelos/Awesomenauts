@@ -15,6 +15,7 @@ game.resources = [
 	 {name: "creep1", type:"image", src: "data/img/brainmonster.png"},
 	 // loads second player image
 	 {name: "Player2", type:"image", src: "data/img/gloop.png"},
+	 //added title image so i can use it 
 	{name: "title-screen", type:"image", src: "data/img/title.png"},
 	/* Atlases 
 	 * @example

@@ -75,6 +75,7 @@ var game = {
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 
 		// Start the game.
+		//changed it so it starts on the title screen and not the game
 		me.state.change(me.state.MENU);
 	}
 };
