@@ -431,6 +431,7 @@ game.EnemyCreep = me.Entity.extend({
 
     }
 });
+//Added a second player
 game.Player2 = me.Entity.extend({
 // sets properties of enemy player 
 	init: function(x, y, settings){
@@ -549,9 +550,11 @@ game.GameManager = Object.extend({
         this.now = new Date().getTime();
         //keeps track on whether we should be making creeps
         //checks to see if we have a multiple of 10
-
+//if the playaer is dead,
 if(game.data.player.dead){
+	//remove the player
 	me.game.world.removeChild(game.data.player);
+	//reset the players life
 	me.state.current().resetPlayer(10, 0);
 }
         if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {

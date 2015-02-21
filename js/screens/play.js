@@ -8,6 +8,7 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		//telling it what to look at as far as maps
 		me.levelDirector.loadLevel("level01");
+		//restarts the player at the left of the screen
 		this.resetPlayer(0, 420);
 		
 		var gamemanager = me.pool.pull("GameManager", 0, 0, {});
@@ -35,7 +36,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		// remove the HUD from the game world
 		me.game.world.removeChild(this.HUD);
 	},
-
+	//created a reset function
 	resetPlayer: function(x, y){
 		// set a value to the variable player.
 		 game.data.player = me.pool.pull("player", 0, 420, {});
