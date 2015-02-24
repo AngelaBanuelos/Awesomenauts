@@ -2,7 +2,22 @@
 game.PlayerEntity = me.Entity.extend({
     //initializes the function 
     init: function(x, y, settings) {
-        this._super(me.Entity, 'init', [x, y, {
+        this.setSuper();
+        this.setPlayerTimers();
+        this.setAttributes();
+        this.type = "PlayerEntity";
+        this.setFlags();
+      
+        me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
+        
+        this.addAnimation();
+        
+        //adds animation to non-moving position 
+        this.renderable.setCurrentAnimation("idle");
+
+    },
+    setSuper: function(){
+    	this._super(me.Entity, 'init', [x, y, {
                 //makes the image of the player appear
                 image: "player",
                 //the width of the space created
@@ -20,35 +35,40 @@ game.PlayerEntity = me.Entity.extend({
                     return(new me.Rect(0, 0, 64, 64)).toPolygon();
                 }
             }]);
-        this.type = "PlayerEntity";
-        //changed to global variable playerHealth
-        this.health = game.data.playerHealth;
+
+    },
+    setPlayerTimers: function(){
+    	//checks the time for the game
+        this.now = new Date().getTime();
+        this.lastHit = this.now;
+        //stop the player from hitting over and over again
+        this.lastAttack = new Date().getTime();
+
+    },
+
+    setAttributes: function(){
+    	 this.health = game.data.playerHealth;
         //it sets the speed of the player when it moves to the right
         //y location changes
         //it moved down to the player
         //changed velocity to global variable 
         this.body.setVelocity(game.data.playerMoveSpeed, 20);
-        //keeps track of which direction your character is going
+         //makes the player get attacked..?
+        this.attack = game.data.playerAttack;
+    },
+    setFlags: function(){
+    	  //keeps track of which direction your character is going
         this.facing = "right";
-        //checks the time for the game
-        this.now = new Date().getTime();
-        this.lastHit = this.now;
-        //stop the player from hitting over and over again
-        this.lastAttack = new Date().getTime();
         //states  that the player is alive.
         this.dead = false;
-        //makes the player get attacked..?
-        this.attack = game.data.playerAttack;
-        me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
-        //adds animation to standing starting position
+    },
+    addAnimation: function(){
+    	//adds animation to standing starting position
         this.renderable.addAnimation("idle", [78]);
         //adds animation to walking 
         this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
         //animation for character attack
         this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
-        //adds animation to non-moving position 
-        this.renderable.setCurrentAnimation("idle");
-
     },
     //updates the function
     //whole set for just the x-axis
@@ -326,3 +346,8 @@ game.Player2 = me.Entity.extend({
 	
 
 });
+
+
+
+
+
