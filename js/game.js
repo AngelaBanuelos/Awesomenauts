@@ -24,6 +24,7 @@ var game = {
 		creepMoveSpeed: 5,
 		gameManager: "",
 		player: "",
+		//added global variables for gold and experience 
 		exp: 0,
 		gold: 0, 
 		exp1: 0,
