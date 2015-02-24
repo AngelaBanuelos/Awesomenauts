@@ -37,6 +37,7 @@ game.PlayerEntity = me.Entity.extend({
         this.lastAttack = new Date().getTime();
         //states  that the player is alive.
         this.dead = false;
+        this.attack = game.data.playerAttack;
         //
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
         //adds animation to standing starting position
@@ -197,6 +198,13 @@ game.PlayerEntity = me.Entity.extend({
         			(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))) {
         		//
         		this.lastHit = this.now;
+        		//if the creeps health is less than our attack, execute code in if statement
+        		if(response.b.health <= game.data.playerAttack){
+        			//adds one gold for a creep gold
+        			game.data.gold += 1;
+        			console.log("Current gold: " + game.data.gold);
+
+        		}
         		//calls the lose health function from the creep.
         		//aded a global variable for playerAttack
         		response.b.loseHealth(game.data.playerAttack);
@@ -541,6 +549,7 @@ game.GameManager = Object.extend({
         this.now = new Date().getTime();
         //keep track of the last time we made a creep happen
         this.lastCreep = new Date().getTime();
+        this.paused = false;
         //makes sure it is always updating
         this.alwaysUpdate = true;
     },
@@ -557,6 +566,13 @@ if(game.data.player.dead){
 	//reset the players life
 	me.state.current().resetPlayer(10, 0);
 }
+ if (Math.round(this.now / 1000) % 20 === 0 && (this.now - this.lastCreep >= 1000)) {
+           game.data.gold += 1;
+           console.log("Current gold: " + game.data.gold);
+        }
+
+
+
         if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
             this.lastCreep = this.now;
             //creates a creep
