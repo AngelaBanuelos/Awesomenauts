@@ -61,6 +61,7 @@ game.PlayerEntity = me.Entity.extend({
         this.facing = "right";
         //states  that the player is alive.
         this.dead = false;
+        this.attacking = false;
     },
     addAnimation: function(){
     	//adds animation to standing starting position
@@ -75,37 +76,11 @@ game.PlayerEntity = me.Entity.extend({
     update: function(delta) {
         //keeps it up to date
         this.now = new Date().getTime();
-
         this.dead = checkIfDead();
-
         this.checkKeyPressesAndMove();
-
-        this.
-
-
-        if (me.input.isKeyPressed("attack")) {
-            if (!this.renderable.isCurrentAnimation("attack")) {
-                console.log(!this.renderable.isCurrentAnimation("attack"));
-                //sets the current animation to attck and once that is over goes back to idle animation 
-                this.renderable.setCurrentAnimation("attack", "idle");
-                //makes it so that the next time we start this sequence we begin from the first animation not whenever we left off when we switched to another animation
-                this.renderable.setAnimationFrame();
-            }
-        }
-
-
-        //if the button is pushed then it will walk but it not it will execute the else code
-        else if (this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {
-            if (!this.renderable.isCurrentAnimation("walk")) {
-                this.renderable.setCurrentAnimation("walk");
-            }
-        } else if (!this.renderable.isCurrentAnimation("attack")) {
-            //if not, make it stand still
-            this.renderable.setCurrentAnimation("idle");
-        }
+        this.setAnimation();
         //checks for collisions 
         me.collision.check(this, true, this.collideHandler.bind(this), true);
-
         //updates the function to true
         this.body.update(delta);
         //updates the animation
@@ -129,14 +104,9 @@ game.PlayerEntity = me.Entity.extend({
     //moves the player right
         if (me.input.isKeyPressed("right")) {
         	this.moveRight();
-
-        
-
         //moves the player left
         }else if (me.input.isKeyPressed("left")) {
         	this.moveLeft();
-            
-        
         }else {
             //for when the righ arrow isnt clicked
             this.body.vel.x = 0;
@@ -147,6 +117,7 @@ game.PlayerEntity = me.Entity.extend({
         if (me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
             this.jump();
         }
+        this.attacking = me.input.isKeyPressed("attack");
 
     },
 
@@ -167,6 +138,38 @@ game.PlayerEntity = me.Entity.extend({
             this.facing = "left";
             this.body.vel.x -= this.body.accel.x * me.timer.tick;
             this.flipX(false);
+
+    },
+
+    jump: function(){
+    	this.body.jumping = true;
+            this.body.vel.y -= this.body.accel.y * me.timer.tick;
+            //this plays soud effects when jumping
+            me.audio.play("jump");
+
+    },
+
+    setAnimation: function(){
+    	if (this.attacking) {
+            if (!this.renderable.isCurrentAnimation("attack")) {
+                console.log(!this.renderable.isCurrentAnimation("attack"));
+                //sets the current animation to attck and once that is over goes back to idle animation 
+                this.renderable.setCurrentAnimation("attack", "idle");
+                //makes it so that the next time we start this sequence we begin from the first animation not whenever we left off when we switched to another animation
+                this.renderable.setAnimationFrame();
+            }
+        }
+
+
+        //if the button is pushed then it will walk but it not it will execute the else code
+        else if (this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {
+            if (!this.renderable.isCurrentAnimation("walk")) {
+                this.renderable.setCurrentAnimation("walk");
+            }
+        } else if (!this.renderable.isCurrentAnimation("attack")) {
+            //if not, make it stand still
+            this.renderable.setCurrentAnimation("idle");
+        }
 
     },
 
