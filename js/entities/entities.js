@@ -75,45 +75,12 @@ game.PlayerEntity = me.Entity.extend({
     update: function(delta) {
         //keeps it up to date
         this.now = new Date().getTime();
-        //if statement for haelth
-        if (this.health <= 0){
-        	//if health 0, player dies
-        	this.dead = true;
-        	
-        }
 
-        //moves the player right
-        if (me.input.isKeyPressed("right")) {
-            //sets the position of my x by adding the velocity defined above in setVelocity and multiplying it by me.timer.tick
-            //me.timer.tick makes the movement look smooth 
-            this.body.vel.x += this.body.accel.x * me.timer.tick;
-            //keeps track of which direction your character is going
-            this.facing = "right";
-            //makes the charcter face to right 
-            this.flipX(true);
+        this.dead = checkIfDead();
 
-        }
+        this.checkKeyPressesAndMove();
 
-        //moves the player left
-        else if (me.input.isKeyPressed("left")) {
-            //keeps track of which direction your character is going
-            this.facing = "left";
-            this.body.vel.x -= this.body.accel.x * me.timer.tick;
-            this.flipX(false);
-        }
-        else {
-            //for when the righ arrow isnt clicked
-            this.body.vel.x = 0;
-        }
-        //set for the y-axis
-        //so the player can go right or left and still jump
-        //no double jumping
-        if (me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
-            this.body.jumping = true;
-            this.body.vel.y -= this.body.accel.y * me.timer.tick;
-            //this plays soud effects when jumping
-            me.audio.play("jump");
-        }
+        this.
 
 
         if (me.input.isKeyPressed("attack")) {
@@ -144,6 +111,62 @@ game.PlayerEntity = me.Entity.extend({
         //updates the animation
         this._super(me.Entity, "update", [delta]);
         return true;
+
+    },
+
+    checkIfDead: function(){
+    	  //if statement for haelth
+        if (this.health <= 0){
+        	//if health 0, player dies
+        	return true;
+        	
+        }
+        return false;
+
+    },
+
+    checkKeyPressesAndMove: function(){
+    //moves the player right
+        if (me.input.isKeyPressed("right")) {
+        	this.moveRight();
+
+        
+
+        //moves the player left
+        }else if (me.input.isKeyPressed("left")) {
+        	this.moveLeft();
+            
+        
+        }else {
+            //for when the righ arrow isnt clicked
+            this.body.vel.x = 0;
+        }
+        //set for the y-axis
+        //so the player can go right or left and still jump
+        //no double jumping
+        if (me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
+            this.jump();
+        }
+
+    },
+
+    moveRight: function(){
+    
+            //sets the position of my x by adding the velocity defined above in setVelocity and multiplying it by me.timer.tick
+            //me.timer.tick makes the movement look smooth 
+            this.body.vel.x += this.body.accel.x * me.timer.tick;
+            //keeps track of which direction your character is going
+            this.facing = "right";
+            //makes the charcter face to right 
+            this.flipX(true);
+
+    },
+
+    moveLeft: function(){
+    	//keeps track of which direction your character is going
+            this.facing = "left";
+            this.body.vel.x -= this.body.accel.x * me.timer.tick;
+            this.flipX(false);
 
     },
 
