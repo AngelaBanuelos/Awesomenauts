@@ -180,7 +180,16 @@ game.PlayerEntity = me.Entity.extend({
     //holds info about collision
     collideHandler: function(response) {
         if (response.b.type === 'EnemyBaseEntity') {
-            //the y difference between the players y position and the base y position
+            this.collideWithEnemyBase(response);
+            //if the player collide with the enemy creep, this code gets executed.
+        }else if(response.b.type==='EnemyCreep'){
+        	this.colliseWithEnemyCreep(response);
+        	
+        }
+    },
+
+collideWithEnemyBase: function(response){
+//the y difference between the players y position and the base y position
             //keep track of the position of both objects 
             var ydif = this.pos.y - response.b.pos.y;
             var xdif = this.pos.x - response.b.pos.x;
@@ -194,16 +203,12 @@ game.PlayerEntity = me.Entity.extend({
             else if (xdif > -35 && this.facing === 'right' && (xdif < 0)) {
                 //stop the player from moving
                 this.body.vel.x = 0;
-                //move player backwards 
-                //this.pos.x = this.pos.x - 1;
             }
             //stops the player on the right side of the tower
             //prevent from over lapping
             else if (xdif < 70 && this.facing === 'left' && xdif > 0) {
                 //stop the player from moving
                 this.body.vel.x = 0;
-                //moves player forward
-                //this.pos.x = this.pos.x + 1;
             }
             //added global variable for playerAttackTimer
             if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer) {
@@ -214,62 +219,61 @@ game.PlayerEntity = me.Entity.extend({
                 //added global variable for playerAttack
                 response.b.loseHealth(game.data.playerAttack);
             }
-            //if the player collide with the enemy creep, this code gets executed.
-        }else if(response.b.type==='EnemyCreep'){
-        	//the y difference between the players y position and the creep y position
+},
+
+collideWithEnemyCreep: function(response){
+//the y difference between the players y position and the creep y position
             //keep track of the position of both objects 
         	var xdif = this.pos.x - response.b.pos.x;
         	var ydif = this.pos.y - response.b.pos.y;
-        	//
-        	if (xdif>0){
-        		//moves it to the right
-        		//this.pos.x = this.pos.x + 1;
+        	this.stopMovement(xdif);
+        	if(this.checkAttack(xdif, ydif)){
+        	this.hitCreep(response);
+
+        	};
+	},
+
+	stopMovement: function(xdif){
+	if (xdif>0){
         		//when the player and creep are facing each other, the player can attack.
         		if(this.facing==="left"){
         			//sets the velocity to 0 
         			this.body.vel.x = 0;
         		}
         	}else{
-        		//moves it to the left
-        		//this.pos.x = this.pos.x -1;
         		//when the player and creep are facing each other, the player can attack.
         		if(this.facing==="right"){
         			// sets the velocity to 0
         			this.body.vel.x = 0;
         		}
         	}
-        	//added a global variable for playerAttackTimer
+	},
+
+	checkAttack: function(xdif, ydif){
+	//added a global variable for playerAttackTimer
         	if(this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer
         			&& (Math.abs(ydif) <=40) && 
         			(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))) {
-        		//
+      
         		this.lastHit = this.now;
-        		//if the creeps health is less than our attack, execute code in if statement
+      			return true;  		
+        	}
+        	return false;
+	},
+
+	hitCreep: function(response){
+	//if the creeps health is less than our attack, execute code in if statement
         		if(response.b.health <= game.data.playerAttack){
         			//adds one gold for a creep gold
         			game.data.gold += 1;
         			//shows in the console log
         			console.log("Current gold: " + game.data.gold);
-
         		}
         		//calls the lose health function from the creep.
         		//aded a global variable for playerAttack
         		response.b.loseHealth(game.data.playerAttack);
-        	}
-        }
-    }
+	}
 });
-
-
-
-
-
-
-
-
-
-
-
 
 //Added a second player
 game.Player2 = me.Entity.extend({
@@ -372,8 +376,3 @@ game.Player2 = me.Entity.extend({
 	
 
 });
-
-
-
-
-
