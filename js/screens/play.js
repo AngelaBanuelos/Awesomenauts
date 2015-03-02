@@ -14,6 +14,9 @@ game.PlayScreen = me.ScreenObject.extend({
 		var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {});
 		me.game.world.addChild(gameTimerManager, 0);
 
+		var heroDeathManager = me.pool.pull("heroDeathManager", 0, 0, {});
+		me.game.world.addChild(heroDeathManager, 0);		
+
 		//moves the player to the right once the right arrow is pushed 
 		me.input.bindKey(me.input.KEY.RIGHT, "right");
 		me.input.bindKey(me.input.KEY.LEFT, "left");

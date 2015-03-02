@@ -175,6 +175,7 @@ game.PlayerEntity = me.Entity.extend({
 
     loseHealth: function(damage) {
     	this.health = this.health - damage;
+    	console.log(this.health);
     },
     //new function that is passing the parameter response 
     //holds info about collision
@@ -183,7 +184,7 @@ game.PlayerEntity = me.Entity.extend({
             this.collideWithEnemyBase(response);
             //if the player collide with the enemy creep, this code gets executed.
         }else if(response.b.type==='EnemyCreep'){
-        	this.colliseWithEnemyCreep(response);
+        	this.collideWithEnemyCreep(response);
         	
         }
     },
