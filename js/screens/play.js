@@ -10,13 +10,13 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.levelDirector.loadLevel("level01");
 		//restarts the player at the left of the screen
 		this.resetPlayer(0, 420);
-		
+		//its not gonna be visible
 		var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {});
 		me.game.world.addChild(gameTimerManager, 0);
-
+		//its not gonna be visible
 		var heroDeathManager = me.pool.pull("HeroDeathManager", 0, 0, {});
 		me.game.world.addChild(heroDeathManager, 0);
-
+		//its not gonna be visible
 		var experienceManager = me.pool.pull("ExperienceManager", 0, 0, {});
 		me.game.world.addChild(experienceManager, 0);		
 
