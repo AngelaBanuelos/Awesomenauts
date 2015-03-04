@@ -42,8 +42,34 @@ game.TitleScreen = me.ScreenObject.extend({
 			}
 
 		})));
-	},
-	
+		
+		me.game.world.addChild(new (me.Renderable.extend({
+			init: function(){
+				//changed the x, y, width and height
+				this._super(me.Renderable, "init", [380, 340, 250, 50])
+				//makes th efont arial and font size 46 and the color white.
+				this.font = new me.Font("Arial", 46, "white");
+			//registered the pointer to start new game
+				me.input.registerPointerEvent('pointerdown', this, this.newGame.bind(this), true);
+			},
+			draw: function(renderer){
+				//writes "Awesomenauts" at those specific coordinates
+				//changed the position of "CONTINUE"
+				this.font.draw(renderer.getContext(), "CONTINUE", this.pos.x, this.pos.y);
+			},
+			//listens for the mouse
+			update: function(dt){
+				return true;
+			},
+			//funciton to start a new game
+			newGame: function(){
+				//calls the pointerdown registered input
+				me.input.releasePointerEvent('pointerdown', this);
+				me.state.change(me.state.PLAY);
+			}
+
+		})));
+		},
 	
 	/**	
 	 *  action to perform when leaving this screen (state change)
