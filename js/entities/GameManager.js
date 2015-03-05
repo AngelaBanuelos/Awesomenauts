@@ -69,15 +69,15 @@ game.ExperienceManager = Object.extend({
         //makes sure it is always updating
         this.alwaysUpdate = true;
         //sets gameOver to false
-        this.gameOver = false;
+        this.gameover = false;
     },
     update: function(){
         //if you win the game is not over
-        if(game.data.win === true && !this.gameOver){
+        if(game.data.win === true && !this.gameover){
             //sets gameOver to true
            this.gameOver(true);
         //you get no points 
-        }else if(game.data.win === false && !this.gameOver){
+        }else if(game.data.win === false && !this.gameover){
             //it makes the game be over
             this.gameOver(false);
         }
@@ -97,9 +97,11 @@ game.ExperienceManager = Object.extend({
             game.data.exp += 1;  
             }
             // it makes the game be over
-            this.gameOver = true;
+            this.gameover = true;
             //saves your experience 
             me.save.exp = game.data.exp;
+            //For testing purpose only 
+            me.save.exp2 = 4;
         }
 });
 

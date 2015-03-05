@@ -8,6 +8,8 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		//telling it what to look at as far as maps
 		me.levelDirector.loadLevel("level01");
+		console.log(game.data.exp);
+		console.log(game.data.exp2);
 		//restarts the player at the left of the screen
 		this.resetPlayer(0, 420);
 		//its not gonna be visible
