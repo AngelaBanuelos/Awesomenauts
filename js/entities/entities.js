@@ -377,3 +377,4 @@ game.Player2 = me.Entity.extend({
 	
 
 });
+

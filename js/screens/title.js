@@ -38,6 +38,7 @@ game.TitleScreen = me.ScreenObject.extend({
 				me.save.remove('exp3');
 				//this removes the past experience points and saves the new one
 				me.save.remove('exp4');
+				me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
 				me.state.change(me.state.PLAY);
 			}
 
@@ -70,7 +71,7 @@ game.TitleScreen = me.ScreenObject.extend({
 				game.data.exp4 = me.save.exp4;
 				//calls the pointerdown registered input
 				me.input.releasePointerEvent('pointerdown', this);
-				me.state.change(me.state.PLAY);
+				me.state.change(me.state.SPENDEXP);
 			}
 
 		})));
