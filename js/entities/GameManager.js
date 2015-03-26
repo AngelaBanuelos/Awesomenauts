@@ -16,13 +16,14 @@ game.GameTimerManager = Object.extend({
         this.now = new Date().getTime();
         this.goldTimerCheck();
         this.creepTimerCheck();
+
         
         return true;
     },
     goldTimerCheck: function(){
         if (Math.round(this.now / 1000) % 20 === 0 && (this.now - this.lastCreep >= 1000)) {
             //add 1 peice of gold 
-           game.data.gold += 1;
+           game.data.gold += (game.data.exp1+1);
            //shows the number of gold in the console log
            console.log("Current gold: " + game.data.gold);
         }
@@ -107,5 +108,81 @@ game.ExperienceManager = Object.extend({
         }
 });
 
+game.SpendGold = Object.extend({
+init: function(x, y, settings){
+        //the time that we want to use
+        this.now = new Date().getTime();
+        //keep track of the last time we made a creep happen
+        this.lastBuy = new Date().getTime();
+        //doesnt pause the game
+        this.paused = false;
+        //makes sure it is always updating
+        this.alwaysUpdate = true;
+        this.updateWhenPaused = true;
+        this.buying = false;
+},
 
+update: function(){
+    //the time that we want to use
+        this.now = new Date().getTime();
+    if(me.input.isKeyPressed("buy") && this.now-this.lastBuy >=1000){ 
+        this.lastBuy = this.now;
+        if(!this.buying){
+            this.startBuying();
+        }else{
+            this.stopBuying();
+        }
+    }
+    return true;
+},
+startBuying: function(){
+this.buying = true;
+me.state.pause(me.state.PLAY);
+game.data.pausePos = me.game.viewport.localToWorld(0, 0);
+game.data.buyscreen = new me.Sprite(game.data.pausePos.x, game.data.pausePos.y, me.loader.getImage('gold-screen'));
+game.data.buyscreen.updateWhenPaused = true;
+game.data.buyscreen.setOpacity(0.8);
+me.game.world.addChild(game.data.buyscreen, 34);
+game.data.player.body.setVelocity(0, 0);
+me.input.bindKey(me.input.KEY.F1, "F1", true);
+me.input.bindKey(me.input.KEY.F1, "F2", true);
+me.input.bindKey(me.input.KEY.F1, "F3", true);
+me.input.bindKey(me.input.KEY.F1, "F4", true);
+me.input.bindKey(me.input.KEY.F1, "F5", true);
+me.input.bindKey(me.input.KEY.F1, "F6", true);
+this.setBuyText();
+},
+setBuyText: function(){
+   game.data.buytext = new (me.Renderable.extend({
+            init: function(){
+                //changed the x, y, width and height
+                this._super(me.Renderable, "init", [game.data.pausePos.x, game.data.pausePos.y, 300, 50]);
+                //makes th efont arial and font size 46 and the color white.
+                this.font = new me.Font("Arial", 26, "white");
+                this.updateWhenPaused = true;
+                this.alwaysUpdate = true;
+            },
+            draw: function(renderer){
+                //writes "Awesomenauts" at those specific coordinates
+                //changed the position of "Start A New Game" 
+                this.font.draw(renderer.getContext(), "Press F1-F6 To Buy, B TO EXIT", this.pos.x, this.pos.y);
+            }
+        }));
+me.game.world.addChild(game.data.buytext, 35);
+},
+
+stopBuying: function(){
+this.buying = false;
+me.state.resume(me.state.PLAY);
+game.data.player.body.setVelocity(game.data.playerMoveSpeed, 20);
+me.game.world.removeChild(game.data.buyscreen);
+me.input.unbindKey(me.input.KEY.F1, "F1", true);
+me.input.unbindKey(me.input.KEY.F1, "F2", true);
+me.input.unbindKey(me.input.KEY.F1, "F3", true);
+me.input.unbindKey(me.input.KEY.F1, "F4", true);
+me.input.unbindKey(me.input.KEY.F1, "F5", true);
+me.input.unbindKey(me.input.KEY.F1, "F6", true);
+me.game.world.removeChild(game.data.buytext);
+}
+});
 
