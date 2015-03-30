@@ -28,18 +28,18 @@ game.TitleScreen = me.ScreenObject.extend({
 			newGame: function(){
 				//calls the pointerdown registered input
 				me.input.releasePointerEvent('pointerdown', this);
-				//this removes the past experience points and saves the new one
-				me.save.remove('exp');
-				//this removes the past experience points and saves the new one
-				me.save.remove('exp1');
-				//this removes the past experience points and saves the new one
-				me.save.remove('exp2');
-				//this removes the past experience points and saves the new one
-				me.save.remove('exp3');
-				//this removes the past experience points and saves the new one
-				me.save.remove('exp4');
-				me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
-				me.state.change(me.state.PLAY);
+				// //this removes the past experience points and saves the new one
+				// me.save.remove('exp');
+				// //this removes the past experience points and saves the new one
+				// me.save.remove('exp1');
+				// //this removes the past experience points and saves the new one
+				// me.save.remove('exp2');
+				// //this removes the past experience points and saves the new one
+				// me.save.remove('exp3');
+				// //this removes the past experience points and saves the new one
+				// me.save.remove('exp4');
+				// me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
+				me.state.change(me.state.LOAD);
 			}
 
 		})));
@@ -64,17 +64,19 @@ game.TitleScreen = me.ScreenObject.extend({
 			},
 			//funciton to start a new game
 			newGame: function(){
-				game.data.exp = me.save.exp;
-				game.data.exp1 = me.save.exp1;
-				game.data.exp2 = me.save.exp2;
-				game.data.exp3 = me.save.exp3;
-				game.data.exp4 = me.save.exp4;
+				// game.data.exp = me.save.exp;
+				// game.data.exp1 = me.save.exp1;
+				// game.data.exp2 = me.save.exp2;
+				// game.data.exp3 = me.save.exp3;
+				// game.data.exp4 = me.save.exp4;
 				//calls the pointerdown registered input
 				me.input.releasePointerEvent('pointerdown', this);
-				me.state.change(me.state.SPENDEXP);
+				me.state.change(me.state.NEW);
 			}
 
 		})));
+
+
 		},
 	
 	/**	

@@ -1,6 +1,4 @@
 
-
-
 game.ExperienceManager = Object.extend({
     init: function(x, y, settings){
         //makes sure it is always updating

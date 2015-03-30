@@ -64,6 +64,8 @@ var game = {
 
 	me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
 	me.state.SPENDEXP = 112;
+	me.state.LOAD = 113;
+	me.state.NEW = 114;
 	console.log(game.data.exp);
 	console.log(game.data.exp1);
 	console.log(game.data.exp2);
@@ -102,8 +104,9 @@ var game = {
 		me.pool.register("SpendGold", game.SpendGold);
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
-		me.state.set(me.state.SPENDEXP, new game.SpendExp());
-
+		me.state.set(me.state.SPENDEXP, new game.LoadProfile());
+		me.state.set(me.state.LOAD, new game.NewProfile());
+		me.state.set(me.state.NEW, new game.SpendExp());
 		// Start the game.
 		//changed it so it starts on the title screen and not the game
 		me.state.change(me.state.MENU);
