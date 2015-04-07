@@ -34,11 +34,14 @@ game.GameTimerManager = Object.extend({
             this.lastCreep = this.now;
             //creates a creep
             var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
+            //creates a creep
             //adds the creep to the world
             me.game.world.addChild(creepe, 5);
-             var creepe2 = me.pool.pull("Player2", 200, 0, {});
-            //adds the creep to the world
+            var creepe2 = me.pool.pull("Player2", 200, 0, {});
             me.game.world.addChild(creepe2, 5);
+             var creepe3 = me.pool.pull("EnemyHero", 1000, 100, {});
+            //adds the creep to the world
+            me.game.world.addChild(creepe3, 5);
         }
 
     }
