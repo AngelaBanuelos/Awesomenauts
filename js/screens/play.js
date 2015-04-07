@@ -60,7 +60,9 @@ game.PlayScreen = me.ScreenObject.extend({
 		// set a value to the variable player.
 		 game.data.player = me.pool.pull("player", 0, 420, {});
 		//sets the height of where the player appears on the screen.
-		me.game.world.addChild(game.data.player, 5); 
+		me.game.world.addChild(game.data.player, 5);
+		game.data.miniPlayer = me.pool.pull("miniplayer", 10, 10, {});
+		me.game.world.addChild(game.data.miniPlayer, 31);
 
 
 	}
