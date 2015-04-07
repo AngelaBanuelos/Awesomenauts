@@ -32,10 +32,10 @@
 			<?php
 		}		
 		else {
-			echo "<p>Invalid username and password</p>";
+			echo "Invalid username and password";
 		}
 	}
 		else {
-			echo "<p>Invalild username and password</p>";
+			echo "Invalild username and password";
 		}
 
