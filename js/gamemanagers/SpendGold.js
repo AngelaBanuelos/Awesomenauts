@@ -76,11 +76,11 @@ me.state.resume(me.state.PLAY);
 game.data.player.body.setVelocity(game.data.playerMoveSpeed, 20);
 me.game.world.removeChild(game.data.buyscreen);
 me.input.unbindKey(me.input.KEY.F1, "F1", true);
-me.input.unbindKey(me.input.KEY.F1, "F2", true);
-me.input.unbindKey(me.input.KEY.F1, "F3", true);
-me.input.unbindKey(me.input.KEY.F1, "F4", true);
-me.input.unbindKey(me.input.KEY.F1, "F5", true);
-me.input.unbindKey(me.input.KEY.F1, "F6", true);
+me.input.unbindKey(me.input.KEY.F2, "F2", true);
+me.input.unbindKey(me.input.KEY.F3, "F3", true);
+me.input.unbindKey(me.input.KEY.F4, "F4", true);
+me.input.unbindKey(me.input.KEY.F5, "F5", true);
+me.input.unbindKey(me.input.KEY.F6, "F6", true);
 me.game.world.removeChild(game.data.buytext);
 },
 
