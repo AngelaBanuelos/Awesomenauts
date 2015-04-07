@@ -14,14 +14,3 @@ require_once(__DIR__ . "/../model/config.php");
 		. "exp3 init(4),"
 		. "exp4 init(4),"
 		. "PRIMARY KEY (id))");
-
-	if($query) {
-		//checks if the table was created successfully
-		echo "<p> Successfully created table users</p>";
-	}
-	else{
-		//added a session variable, which preserves info
-		echo "<p>" . $_SESSION["connection"]->error . "</p>";
-	}
-	
-	
