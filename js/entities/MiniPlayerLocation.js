@@ -1,6 +1,10 @@
 game.MiniPlayerLocation = me.Entity.extend({
-	init: function(x, y, settings) {}
+	init: function(x, y, settings) {
 		this.settings = settings;
+		//customizes the map 
++		//tells where the map will be displayed
++		//tells how big the map is
++		// tells to follow character
 		this.r = 5;
 		this.diameter = (this.r+2)*2;
 		this.anchorPoint = new me.Vector2d(0, 0);

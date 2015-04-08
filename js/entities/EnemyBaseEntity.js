@@ -44,6 +44,7 @@ game.EnemyBaseEntity = me.Entity.extend({
             //when the player dies the tower is set on fire
             this.renderable.setCurrentAnimation("broken");
         }
+        //updates  delts
         this.body.update(delta);
         this._super(me.Entity, "update", [delta]);
         return true;

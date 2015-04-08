@@ -5,7 +5,7 @@ game.TitleScreen = me.ScreenObject.extend({
 	onResetEvent: function() {
 	//adds and loads the title image	
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('title-screen')), -10); // TODO
-		
+		//adds the word awesomenauts to the title screen
 		me.game.world.addChild(new (me.Renderable.extend({
 			init: function(){
 				//changed the x, y, width and height
@@ -15,6 +15,7 @@ game.TitleScreen = me.ScreenObject.extend({
 				//registered the pointer to start new game
 				me.input.registerPointerEvent('pointerdown', this, this.newGame.bind(this), true);
 			},
+			//function tells the font size of the word in quotations
 			draw: function(renderer){
 				//writes "Awesomenauts" at those specific coordinates
 				//changed the position of "Start A New Game"
@@ -43,7 +44,7 @@ game.TitleScreen = me.ScreenObject.extend({
 			}
 
 		})));
-		
+		//adds the word awesomenauts to the game
 		me.game.world.addChild(new (me.Renderable.extend({
 			init: function(){
 				//changed the x, y, width and height

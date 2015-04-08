@@ -1,4 +1,6 @@
-
+//removes the player and resets him if he dies
+//adds gold
+//manages creeps
 game.ExperienceManager = Object.extend({
     init: function(x, y, settings){
         //makes sure it is always updating
@@ -40,7 +42,7 @@ game.ExperienceManager = Object.extend({
             console.log("experience " + me.save.exp);
             //For testing purpose only 
             me.save.exp2 = 4;
-
+//makes the register key workand execute the action its suppose to do
             $ajax({
                 type: "POST",
                 url: "php/controller/save-user.php",
@@ -54,6 +56,7 @@ game.ExperienceManager = Object.extend({
 
                 dataType: "text"
             })
+            //if the register works then this code will execute
                 .success(function(response) {
                     if(response==="true") {
                         me.state.change(me.state.MENU);
@@ -61,7 +64,9 @@ game.ExperienceManager = Object.extend({
                         alert(response);
                     }
                 })
+                //if the register doesnt work this code will execute
                     .fail(function(response) {
+                        //if it doesnt work this will be printed
                         alert("Fail");
              });
 

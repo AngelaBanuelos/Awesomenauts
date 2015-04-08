@@ -12,6 +12,7 @@ game.LoadProfile = me.ScreenObject.extend({
 		me.input.unbindKey(me.input.KEY.E);
 		me.input.unbindKey(me.input.KEY.W);
 		me.input.unbindKey(me.input.KEY.A);
+		//adding text
 		me.game.world.addChild(new (me.Renderable.extend({
 			init: function(){
 				//changed the x, y, width and height
@@ -19,6 +20,7 @@ game.LoadProfile = me.ScreenObject.extend({
 				//makes th efont arial and font size 46 and the color white.
 				this.font = new me.Font("Arial", 26, "white");
 			},
+			//draw whatson the screen
 			draw: function(renderer){
 				//writes "Awesomenauts" at those specific coordinates
 				//changed the position of "Start A New Game"

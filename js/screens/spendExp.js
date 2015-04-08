@@ -31,11 +31,13 @@ game.SpendExp = me.ScreenObject.extend({
 		})));
 
 this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge){
+	//add one if exp is greater than exp1cost 
 if(action === "F1"){
 	if(game.data.exp >= exp1cost){
 		game.data.exp1 += 1;
 	    game.data.exp -= exp1cost;
 	    me.state.change(me.state.PLAY);
+	    //else: let the player know
 	}else{
 		console.log("not enough experience");
 	}
@@ -56,8 +58,11 @@ if(action === "F1"){
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
+		//unbind the key
 		me.input.unbindKey(me.input.KEY.F1, "F1");
+		//unbind the key
 		me.input.unbindKey(me.input.KEY.F2, "F2");
+		//unbind the key
 		me.input.unbindKey(me.input.KEY.F3, "F3");
 		me.input.unbindKey(me.input.KEY.F4, "F4");
 		me.input.unbindKey(me.input.KEY.F5, "F5");

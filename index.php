@@ -24,11 +24,11 @@
 		<form id="input" method="post">
 		<div class="field">
 		<label for="username">Username</label>
-		<input type='password' name='password' id='password'>
+		<input type='text' name='password' id='password'>
 		</div>
 		<div class='password'>
 		<label for='password'>Password</label>
-		<input type='text' name='password' id='password'>
+		<input type='password' name='password' id='password'>
 		</div>
 		<button type='button' id='register'>Register</button>
 		<button type='button' id='load'>Load</button>
@@ -65,9 +65,9 @@
 		<script type="text/javascript" src="js/entities/EnemyHero.js"></script>
 		<script type="text/javascript" src="js/screens/title.js"></script>
 		<script type="text/javascript" src="js/screens/play.js"></script>
-		<script type="text/javascript" src="js/screens/SpearThrow.js"></script>
-		<script type="text/javascript" src="js/screens/MiniMap.js"></script>
-		<script type="text/javascript" src="js/screens/MiniPlayerLocation.js"></script>
+		<script type="text/javascript" src="js/entities/SpearThrow.js"></script>
+		<script type="text/javascript" src="js/entities/MiniMap.js"></script>
+		<script type="text/javascript" src="js/entities/MiniPlayerLocation.js"></script>
 		<script type="text/javascript" src="js/screens/spendExp.js"></script>
 		<script type="text/javascript" src="js/screens/loadProfile.js"></script>
 		<script type="text/javascript" src="js/screens/newProfile.js"></script>

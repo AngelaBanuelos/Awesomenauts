@@ -17,12 +17,19 @@ game.resources = [
 	 {name: "Player2", type:"image", src: "data/img/gloop.png"},
 	 //added title image so i can use it 
 	{name: "title-screen", type:"image", src: "data/img/title.png"},
+	//added exp-sreen image so i can use it 
 	{name: "exp-screen", type:"image", src: "data/img/loadpic.png"},
+	//added hero image so i can use it 
 	{name: "hero", type:"image", src: "data/img/skeletonDagger.png"},
+	//added gold-screen image so i can use it 
 	{name: "gold-screen", type:"image", src: "data/img/spend.png"},
+	//added load-screen image so i can use it 
 	{name: "load-screen", type:"image", src: "data/img/loadpic.png"},
+	//added new-screen image so i can use it 
 	{name: "new-screen", type:"image", src: "data/img/newpic.png"},
+	//added spear image so i can use it 
 	{name: "spear", type:"image", src: "data/img/spear.png"},
+	//added minimap image so i can use it 
 	{name: "minimap", type:"image", src: "data/img/minimap.png"},
 	/* Atlases 
 	 * @example

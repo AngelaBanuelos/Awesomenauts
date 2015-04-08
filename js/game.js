@@ -8,7 +8,7 @@ var game = {
 		// score
 		score : 0,
 		option1: "",
-+		option2: "",
+		option2: "",
 		//made the following global variables
 		enemyBaseHealth: 1,
 		playerBaseHealth: 1,
@@ -101,14 +101,23 @@ var game = {
 		me.pool.register("PlayerBase", game.PlayerBaseEntity);
 		//registered a enemybase to entity.
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
+		//registered a enemycreep to entity.
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
+		//registered a gametimemanager to entity.
 		me.pool.register("GameTimerManager", game.GameTimerManager);
+		//registered a herodeathmanager to entity.
 		me.pool.register("HeroDeathManager", game.HeroDeathManager);
+		//registered a experience manager to entity.
 		me.pool.register("ExperienceManager", game.ExperienceManager);
+		//registered a enemy hero to entity.
 		me.pool.register("EnemyHero", game.EnemyHero);
+		//registered a spendgold to entity.
 		me.pool.register("SpendGold", game.SpendGold);
+		//registered a spear to entity.
 		me.pool.register("spear", game.SpearThrow, true);
+		//registered a minimap to entity.
 		me.pool.register("minimap", game.MiniMap, true);
+		//registered a miniplayer to entity.
 		me.pool.register("miniplayer", game.MiniPlayerLocation, true);
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());

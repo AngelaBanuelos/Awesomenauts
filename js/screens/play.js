@@ -21,7 +21,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		//its not gonna be visible
 		var experienceManager = me.pool.pull("ExperienceManager", 0, 0, {});
 		me.game.world.addChild(experienceManager, 0);		
-
+		//its not gonna be visible
 		var spendGold = me.pool.pull("SpendGold", 0, 0, {});
 		me.game.world.addChild(spendGold, 0);	
 
